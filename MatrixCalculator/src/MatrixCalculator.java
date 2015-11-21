@@ -14,6 +14,11 @@ public class MatrixCalculator {
     public static PowerObject power_method(Matrix a, Vector v, double tol, int n) {
         return PowerMethod.power_method(a, v, tol, n);
     }
+
+    /*public static Matrix[] lu_fact(Matrix a) {
+        return LuFactorization.LuFactorization(a);
+    }*/
+
     /**
      * Multiplies a matrix by a vector
      *
@@ -36,6 +41,32 @@ public class MatrixCalculator {
                 sum += row[i] * x.getVectorEntry(i);
             }
             product.setVectorEntry(rowA, sum);
+        }
+        return product;
+    }
+
+    /**
+     * Multiplies two matrices
+     * @param a The first matrix
+     * @param b The second matrix
+     * @return The matrix containing the product
+     * @throws IllegalArgumentException if the given
+     *         matrices' dimensions cannot be multiplied
+     */
+    public static Matrix multiply(Matrix a, Matrix b) {
+        if (a.getMatrixColumns() != b.getMatrixRows()) {
+            throw new IllegalArgumentException("A's columns must be the same as B's rows");
+        }
+        Matrix product = new Matrix(a.getMatrixRows(), b.getMatrixColumns());
+        double sum;
+        for (int rowA = 0; rowA < a.getMatrixRows(); rowA++) {
+            for (int colB = 0; colB < b.getMatrixColumns(); colB++) {
+                sum = 0;
+                for (int i = 0; i < a.getMatrixColumns(); i++) {
+                    sum += a.getMatrixEntry(rowA, i) * b.getMatrixEntry(i, colB);
+                }
+                product.setMatrixEntry(rowA, colB, sum);
+            }
         }
         return product;
     }

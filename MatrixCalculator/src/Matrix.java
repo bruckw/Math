@@ -82,4 +82,35 @@ public class Matrix {
         }
         matrix[row][column] = value;
     }
+
+    /**
+     * Returns an array of the elements in
+     * the specified column.
+     * @param column The desired column of elements
+     * @return An array with the data from the column
+     * @throws IndexOutOfBoundsException if row and column
+     *         are not valid in the matrix
+     */
+    public Matrix particularColumn(int column) {
+        if (column < 0  || column >= getMatrixColumns()) {
+            throw new IndexOutOfBoundsException();
+        }
+        double[][] desiredColumn = new double[getMatrixRows()][1];
+        for (int row = 0; row < getMatrixRows(); row++) {
+            desiredColumn[row][0] = matrix[row][column];
+        }
+        return new Matrix(desiredColumn);
+    }
+
+    @Override
+    public String toString() {
+        String output = " ";
+        for (int i = 0; i < getMatrixRows(); i++) {
+            for (int j = 0; j < getMatrixColumns(); j++) {
+                output += matrix[i][j] + " ";
+            }
+            output +="\n";
+        }
+        return output;
+    }
 }
