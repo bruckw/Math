@@ -57,4 +57,39 @@ public class Vector {
         }
         vector[row] = value;
     }
+
+    /**
+     * Returns the frobenius norm of the vector
+     * This norm is the square root of sum of squares of the elements in the vector.
+     * @return The norm of the matrix
+     */
+    public double normF() {
+        double sum = 0;
+        for (int i = 0; i < getVectorRows(); i++) {
+            sum += Math.pow(getVectorEntry(i), 2);
+        }
+        return Math.sqrt(sum);
+    }
+
+    /**
+     * The number of elements in the vector
+     * @return The number of elements
+     */
+    public int numberOfElements() {
+        return getVectorRows();
+    }
+
+    /**
+     * Returns the transpose of the given vector.
+     * @return The transpose of the original vector
+     */
+    public Matrix transpose() {
+        Matrix transpose = new Matrix(1, numberOfElements());
+        for (int column = 0; column < getVectorRows(); column++) {
+            transpose.setMatrixEntry(0, column, getVectorEntry(column));
+        }
+        return transpose;
+    }
+
+
 }

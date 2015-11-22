@@ -84,4 +84,98 @@ public class MatrixCalculator {
         }
         return product;
     }
+
+    /**
+     * Adds two matrices' values together
+     * @param a The first matrix
+     * @param b The second matrix
+     * @return The matrix of containing the sum
+     * @throws IllegalArgumentException if the given
+     *		   matrices have different dimensions
+     */
+    public static Matrix add(Matrix a, Matrix b) {
+
+        if (a.getMatrixRows() != b.getMatrixRows() || a.getMatrixColumns() != b.getMatrixRows()) {
+            throw new IllegalArgumentException("Rows and columns are not equal");
+        }
+
+        Matrix sum = new Matrix(a.getMatrixRows(), a.getMatrixColumns());
+        double sumValue;
+        for (int row = 0; row < a.getMatrixRows(); row++) {
+            for (int column = 0; column < a.getMatrixColumns(); column++) {
+                sumValue = a.getMatrixEntry(row, column) + b.getMatrixEntry(row, column);
+                sum.setMatrixEntry(row, column, sumValue);
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * Subtracts two matrices' values
+     * @param a The first matrix
+     * @param b The second matrix
+     * @return The matrix of containing the difference
+     * @throws IllegalArgumentException if the given
+     *		   matrices have different dimensions
+     */
+    public static Matrix subtract(Matrix a, Matrix b) {
+
+        if (a.getMatrixRows() != b.getMatrixRows() || a.getMatrixColumns() != b.getMatrixColumns()) {
+            throw new IllegalArgumentException("Rows and columns are not equal");
+        }
+
+        Matrix difference = new Matrix(a.getMatrixRows(), a.getMatrixColumns());
+        double differenceValue;
+        for (int row = 0; row < a.getMatrixRows(); row++) {
+            for (int column = 0; column < a.getMatrixColumns(); column++) {
+                differenceValue = a.getMatrixEntry(row, column) - b.getMatrixEntry(row, column);
+                difference.setMatrixEntry(row, column, differenceValue);
+            }
+        }
+        return difference;
+    }
+
+    /**
+     * Adds 2 vectors together.
+     * @param u Vector to add
+     * @param v Vector to add
+     * @return resulting vector of adding u and v together
+     */
+    public static Vector add(Vector u, Vector v) {
+        Vector sum = new Vector(u.getVectorRows());
+        double sumValue;
+        for (int row = 0; row < u.getVectorRows(); row++) {
+            sumValue = u.getVectorEntry(row) + v.getVectorEntry(row);
+            sum.setVectorEntry(row, sumValue);
+        }
+        return sum;
+    }
+
+    /**
+     * Multiplies a vector by a matrix.
+     * @param u The vector
+     * @param uTranspose The matrix
+     * @return The matrix containing the product between a vector and matrix
+     */
+    public static Matrix multiply(Vector u, Matrix uTranspose) {
+        Matrix vector = new Matrix(u);
+        return multiply(vector, uTranspose);
+
+    }
+
+    /**
+     * Multiplies a matrix by a scalar
+     * @param a The matrix
+     * @param scalar The constant to multiply by
+     * @return The matrix containing the product
+     */
+    public static Matrix multiply(Matrix a, double scalar) {
+        Matrix product = new Matrix(a.getMatrixRows(), a.getMatrixColumns());
+        for (int i = 0; i < a.getMatrixRows(); i++) {
+            for (int j = 0; j < a.getMatrixColumns(); j++) {
+                product.setMatrixEntry(i, j, scalar * a.getMatrixEntry(i, j));
+            }
+        }
+        return product;
+    }
 }

@@ -26,6 +26,17 @@ public class Matrix {
             }
         }
     }
+
+    /**
+     * Constructs a matrix with the specified vector.
+     * @param vector The vector to be represented as a matrix
+     */
+    public Matrix(Vector vector) {
+        this.matrix = new double[vector.getVectorRows()][1];
+        for (int i = 0; i < vector.getVectorRows(); i++) {
+            matrix[i][0] = vector.getVectorEntry(i);
+        }
+    }
     /**
      * Retrieves an element in the matrix
      * @param row The row of the element
@@ -57,6 +68,14 @@ public class Matrix {
     }
 
     /**
+     * Returns the backing array for this matrix
+     * @return matrix The backing array for this matrix
+     */
+    public double[][] getArray() {
+        return matrix;
+    }
+
+    /**
      * Returns an array of the elements in the specified row.
      * @param row The desired row of elements
      * @return An array with the data from the row
@@ -84,7 +103,7 @@ public class Matrix {
     }
 
     /**
-     * Returns an array of the elements in
+     * Returns a Matrix of the elements in
      * the specified column.
      * @param column The desired column of elements
      * @return An array with the data from the column
@@ -102,6 +121,92 @@ public class Matrix {
         return new Matrix(desiredColumn);
     }
 
+    /**
+     * Returns the transpose of this matrix.
+     * @return The transpose of the original matrix
+     */
+    public Matrix transpose() {
+        Matrix transpose = new Matrix(getMatrixColumns(), getMatrixRows());
+        int newRow = 0;
+        int newColumn = 0;
+        for (int row = 0; row < getMatrixRows(); row++) {
+            newRow = 0;
+            for (int column = 0; column < getMatrixColumns(); column++) {
+                transpose.setMatrixEntry(newRow, newColumn, getMatrixEntry(row, column));
+                newRow++;
+            }
+            newColumn++;
+        }
+        return transpose;
+    }
+
+    /**
+     * Returns an identity matrix with n rows and n columns
+     * @param n The number of rows/columns
+     * @return The identity matrix
+     */
+    public static Matrix identity(int n) {
+        Matrix identity = new Matrix(n, n);
+        for (int i = 0; i < n; i++) {
+            identity.setMatrixEntry(i, i, 1);
+        }
+        return identity;
+    }
+
+    /**
+     * Returns a sub-vector from this matrix
+     * @param rowStart The row to start at
+     * @param rowEnd The row to end at (inclusive)
+     * @param column The column this sub-vector is in
+     * @return The sub-vector
+     */
+    public Vector getSubVector(int rowStart, int rowEnd, int column) {
+        Vector subVector = new Vector(rowEnd + 1 - rowStart);
+        int subRow = 0;
+        for (int i = rowStart; i <= rowEnd; i++) {
+            subVector.setVectorEntry(subRow++, getMatrixEntry(i, column));
+        }
+        return subVector;
+    }
+
+    /**
+     * Returns the frobenius norm of the matrix
+     * This norm is the square root of sum of squares of elements.
+     * @return The largest value in the matrix
+     */
+    public double normF() {
+        double sum = 0;
+        for (int i = 0; i < getMatrixRows(); i++) {
+            for (int j = 0; j < getMatrixColumns(); j++) {
+                sum += Math.pow(getMatrixEntry(i, j), 2);
+            }
+        }
+        return Math.sqrt(sum);
+    }
+
+    /**
+     * Sets data from a matrix to a sub-matrix in this matrix
+     * @param rowStart The row to start at
+     * @param rowEnd The row to end at (inclusive)
+     * @param colStart The column to start at
+     * @param colEnd The column to end at (inclusive)
+     */
+    public void setMatrix(int rowStart, int rowEnd, int colStart, int colEnd, Matrix subMatrix) {
+        int subRow = 0;
+        int subColumn = 0;
+        for (int i = rowStart; i <= rowEnd; i++) {
+            subColumn = 0;
+            for (int j = colStart; j <= colEnd; j++) {
+                setMatrixEntry(i, j, subMatrix.getMatrixEntry(subRow, subColumn++));
+            }
+            subRow++;
+        }
+    }
+
+    /* Basic toString method, just for running purposes.
+     *
+     *
+     **/
     @Override
     public String toString() {
         String output = " ";
