@@ -1,50 +1,78 @@
+import java.io.*;
 import java.util.Scanner;
 
-
 /**
- * Created by Lily on 11/15/2015.
+ * Controller class to allow users to select which operation
+ * they want to use.
+ *
+ * @author Lily Lau
+ * @version 1.0
  */
 public class StartHere {
     public static void main(String[] args) {
-        PowerGraph.writeGraphs(1000);
-        double[][] arr1 = new double[2][2];
-        arr1[0][0] = 4;
-        arr1[0][1] = 3;
-        arr1[1][0] = 3;
-        arr1[1][1] = 2;
-        Matrix b = new Matrix(arr1);
-        Matrix a = PowerGraph.computeInverse(b);
-        for (int i = 0; i < a.getMatrixRows(); i++) {
-            for (int j = 0; j < a.getMatrixColumns(); j++) {
-                System.out.println(a.getMatrixEntry(i, j));
+        Scanner scan = new Scanner(System.in);
+        System.out.println("----------------------------------");
+        System.out.println("Welcome to the Matrix Calculator!");
+        System.out.println("----------------------------------");
+        System.out.println("(0) Exit");
+        System.out.println("(1) LU Factorization");
+        System.out.println("(2) QR Factorization");
+        System.out.println("(3) Jacobi's Method");
+        System.out.println("(4) Gauss Seidel's Method");
+        System.out.println("(5) Power Method");
+        System.out.println("");
+        System.out.print("Enter the number corresponding to an operation: ");
+        String input = scan.next();
+
+        if (input.equals("1")) {
+            System.out.println("");
+            System.out.println("-----------------------------");
+            System.out.println("You chose LU Factorization!");
+            System.out.println("-----------------------------");
+            System.out.println("(1) Enter your own matrix");
+            System.out.println("(2) Enter a filename to read from");
+            System.out.println("(3) Generate a Pascal Matrix");
+            System.out.println("");
+            System.out.println("Pick a method of input: ");
+        } else if (input.equals("2")) {
+            System.out.println("");
+            System.out.println("-----------------------------");
+            System.out.println("You chose QR Factorization!");
+            System.out.println("-----------------------------");
+            System.out.println("(1) Enter your own matrix");
+            System.out.println("(2) Enter a filename to read from");
+            System.out.println("(3) Generate a Pascal Matrix");
+            System.out.println("");
+        } else if (input.equals("3")) {
+            System.out.println("");
+            System.out.println("-----------------------------");
+            System.out.println("You chose Jacobi's Method!");
+            System.out.println("-----------------------------");
+        } else if (input.equals("4")) {
+            System.out.println("");
+            System.out.println("-----------------------------");
+            System.out.println("You chose Gauss' Method!");
+            System.out.println("-----------------------------");
+        } else if (input.equals("5")) {
+            System.out.println("");
+            System.out.println("-----------------------------");
+            System.out.println("You chose the Power Method!");
+            System.out.println("-----------------------------");
+        } else {
+            String fileName = "matrix.dat";
+            String line;
+            try {
+                FileReader fileReader = new FileReader(fileName);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                while ((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+                }
+                bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                System.out.println("Unable to open file '" + fileName + "'");
+            } catch (IOException ex) {
+                System.out.println("Error reading file '" + fileName + "'");
             }
         }
-
-        System.out.print("Say something: ");
-        //Scanner sc = new Scanner(System.in);
-        //String i = sc.next();
-        double[][] arr = new double[3][3];
-        arr[0][0] = 1;
-        arr[0][1] = 1;
-        arr[0][2] = -1;
-        arr[1][0] = 1;
-        arr[1][1] = 2;
-        arr[1][2] = 1;
-        arr[2][0] = 2;
-        arr[2][1] = -1;
-        arr[2][2] = 1;
-        double[] varr = new double[3];
-        varr[0] = 1;
-        varr[1] = 1;
-        varr[2] = 1;
-        Matrix testM = new Matrix(arr);
-        Vector testV = new Vector(varr);
-        double tol = .01;
-        PowerObject ans = PowerMethod.power_method(testM, testV, tol, 100);
-        System.out.println(ans.getEigenvalue());
-        for (int i = 0; i < ans.getEigenvector().getVectorRows(); i++) {
-            System.out.println(ans.getEigenvector().getVectorEntry(i));
-        }
-        System.out.println(ans.getIterations());
     }
 }
