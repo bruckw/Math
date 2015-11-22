@@ -1,12 +1,13 @@
 public class qr_fact_househ {
 
     public static void main(String[] args) {//Main method for testing.
-        double[][] matrixA = {
-                { 1, 2, 3 },
-                { 2, -4, 6 },
-                { 3, -9, -3 }
-        };
-        Matrix b = new Matrix(matrixA);
+//        double[][] matrixA = {
+//                { 1, 2, 3 },
+//                { 2, -4, 6 },
+//                { 3, -9, -3 }
+//        };
+        Matrix b = PascalMatrix.generatePascalMatrix(4);
+        System.out.println(qr_fact_househ(b)[0]);
         System.out.println(qr_fact_househ(b)[1]);
     }
 
@@ -65,7 +66,6 @@ public class qr_fact_househ {
                 R.setMatrixEntry(i, j, R.getMatrixEntry(i, j) * -1);
             }
         }
-
         Matrix[] A = { Q, R };
         return A;
     }

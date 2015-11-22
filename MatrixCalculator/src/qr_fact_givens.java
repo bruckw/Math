@@ -4,13 +4,15 @@
 public class qr_fact_givens {
 
     public static void main(String[] args) {//Main method for testing.
-        double[][] matrixA = {
-                { 1, 2, 3 },
-                { 2, -4, 6 },
-                { 3, -9, -3 }
-        };
-        Matrix b = new Matrix(matrixA);
+//        double[][] matrixA = {
+//                { 1, 2, 3 },
+//                { 2, -4, 6 },
+//                { 3, -9, -3 }
+//        };
+        Matrix b = PascalMatrix.generatePascalMatrix(4);
         System.out.println(qr_fact_givens(b)[0]);
+        System.out.println(qr_fact_givens(b)[1]);
+
     }
     /**
      * Returns a Matrix array containing the QR factorization
