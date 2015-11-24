@@ -92,7 +92,7 @@ public class Jacobi {
 
         double[] vecb = {0.1,0.1,0.1};
         Vector b = new Vector(vecb);
-        double[] vecx = {-0.11322206013515546, -0.5964437991210172, -0.15884922313274652};
+        double[] vecx = {-0.05328960607790245, 0.0022316659776855374, 0.9639285209520501};
         Vector x = new Vector(vecx);
         Vector toReturn = jacobi_iter(a, x, b, .00005, 100);
         System.out.println(toReturn.toString());

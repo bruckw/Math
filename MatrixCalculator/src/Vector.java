@@ -93,6 +93,23 @@ public class Vector {
         return transpose;
     }
 
+    public static double normINfinity(Vector a) {
+        double[] answer = new double[a.getVectorRows()];
+        for(int i = 0; i < answer.length; i++) {
+            for(int j = 0; j <answer.length; j++) {
+                answer[i] += Math.abs(a.getVectorEntry(i));
+            }
+        }
+        double ans = answer[0];
+        for(int i = 1; i < answer.length; i++) {
+            if(answer[i] > ans) {
+                ans = answer[i];
+            }
+        }
+        return ans;
+    }
+
+
     public static double computeError(Vector a, Vector b) {
         Vector x = MatrixCalculator.subtract(a,b);
         return x.normF();
