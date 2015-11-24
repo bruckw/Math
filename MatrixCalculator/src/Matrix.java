@@ -185,6 +185,23 @@ public class Matrix {
     }
 
     /**
+     * Returns the norm of the matrix as defined in the PDF
+     * This norm is the largest of the elements in the matrix.
+     * @return The norm of the matrix
+     */
+    public double norm() {
+        double largest = getMatrixEntry(0, 0);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] - largest > 0) {
+                    largest = matrix[i][j];
+                }
+            }
+        }
+        return largest;
+    }
+
+    /**
      * Sets data from a matrix to a sub-matrix in this matrix
      * @param rowStart The row to start at
      * @param rowEnd The row to end at (inclusive)

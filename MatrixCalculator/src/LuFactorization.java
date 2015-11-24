@@ -13,8 +13,13 @@ public class LuFactorization {
         { 2, -4, 6 },
         { 3, -9, -3 }
     };
-        Matrix b = new Matrix(matrixA);
+       // Matrix b = new Matrix(matrixA);
+       // System.out.println(LuFactorization(b)[1]);
+        Matrix b = PascalMatrix.generatePascalMatrix(4);
+        System.out.println(b);
         System.out.println(LuFactorization(b)[1]);
+
+        //System.out.println("||LU - A||: " + MatrixCalculator.subtract(MatrixCalculator.multiply(LuFactorization(b)[0], LuFactorization(b)[1]),b).norm());
     }
 
     /**

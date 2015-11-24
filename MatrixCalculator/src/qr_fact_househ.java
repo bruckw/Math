@@ -1,14 +1,25 @@
+/**
+ * QR factorization using HouseHolder Reflection.
+ * Samuel Isang 11/22/2015
+ */
 public class qr_fact_househ {
 
     public static void main(String[] args) {//Main method for testing.
-//        double[][] matrixA = {
-//                { 1, 2, 3 },
-//                { 2, -4, 6 },
-//                { 3, -9, -3 }
-//        };
-        Matrix b = PascalMatrix.generatePascalMatrix(4);
-        System.out.println(qr_fact_househ(b)[0]);
-        System.out.println(qr_fact_househ(b)[1]);
+        double[][] matrixA = {
+                { 1, 2, 3 },
+                { 2, -4, 6 },
+                { 3, -9, -3 }
+        };
+        //Matrix b = new Matrix(matrixA);
+        //System.out.println(MatrixCalculator.multiply(qr_fact_househ(b)[0], qr_fact_househ(b)[1]));
+        Matrix b = PascalMatrix.generatePascalMatrix(2);
+        System.out.println(b);
+
+        //System.out.println(qr_fact_househ(b)[0]);
+        //System.out.println(qr_fact_househ(b)[1]);
+        //System.out.println(MatrixCalculator.multiply(qr_fact_househ(b)[0], qr_fact_househ(b)[1]));
+        System.out.println( MatrixCalculator.subtract(MatrixCalculator.multiply(qr_fact_househ(b)[0], qr_fact_househ(b)[1]),b).normF());
+        //System.out.println("||QR - A||: " + MatrixCalculator.subtract(MatrixCalculator.multiply(qr_fact_househ(b)[0], qr_fact_househ(b)[1]),b).norm());
     }
 
     /**
