@@ -218,4 +218,32 @@ public class Matrix {
         }
         return output;
     }
+
+    /**
+     * Returns the norm of the matrix as defined in the PDF
+     * This norm is the largest of the elements in the matrix.
+     * @return The norm of the matrix
+     */
+    public double norm() {
+        double largest = getMatrixEntry(0, 0);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] - largest > 0) {
+                    largest = matrix[i][j];
+                }
+            }
+        }
+        return largest;
+    }
+
+    public Matrix uminus () {
+        Matrix X = new Matrix(3,3);
+        double[][] C = X.getArray();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                C[i][j] = -matrix[i][j];
+            }
+        }
+        return X;
+    }
 }

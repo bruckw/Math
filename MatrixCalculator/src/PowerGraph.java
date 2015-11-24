@@ -55,9 +55,9 @@ public class PowerGraph {
         int count = 0;
         int cols = 10;
         try {
-            WritableWorkbook workbook = Workbook.createWorkbook(new File("PowerMethodExcel.xls"));
+            WritableWorkbook workbook = Workbook.createWorkbook(new File("Jacobi_Gauss_Excel.xls"));
             WritableSheet sheet = workbook.createSheet("First Sheet", 0);
-            try (BufferedReader br = new BufferedReader(new FileReader(new File("PowerMethodData.txt")))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(new File("Jacobi_Gauss_Data.txt")))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     try {

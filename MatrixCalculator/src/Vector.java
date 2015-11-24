@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Created by Lily on 11/15/2015.
  */
@@ -89,6 +91,17 @@ public class Vector {
             transpose.setMatrixEntry(0, column, getVectorEntry(column));
         }
         return transpose;
+    }
+
+    public static double computeError(Vector a, Vector b) {
+        Vector x = MatrixCalculator.subtract(a,b);
+        return x.normF();
+    }
+
+
+    @Override
+    public String toString() {
+        return Arrays.toString(vector);
     }
 
 
