@@ -50,34 +50,18 @@ public class jacobi_gauss_graph {
             System.out.print("Xk: ");
             System.out.println(xk);
             //solution using Jacobi
-            System.out.print("Matrix A: ");
-            System.out.println(A);
-            System.out.print("vECTOR B: ");
-            System.out.println(b);
-            System.out.println("Tol: " + tol);
             System.out.println("Jacobi Solution: ");
             Vector JacobiXn = Jacobi.jacobi_iter(A, jacobixK, b, .00005, 100);
             approxJ = MatrixCalculator.add(approxJ, JacobiXn);
 
 
             //gauss stuff
-
             final double[] vecy = {0.1,0.1,0.1};
             final Vector y = new Vector(vecb);
-
             System.out.println(JacobiXn);
             System.out.println("");
-
-            System.out.print("Matrix A: ");
-            System.out.println(A);
-            System.out.print("gaussXk: ");
-            System.out.println(gaussxK);
-            System.out.print("vECTOR Y: ");
-            System.out.println(y);
-            System.out.println("Tol: " + tol);
             System.out.println("gauss_seidel Solution: ");
-
-            Vector gaussXn = gauss_seidel.gauss_seidel(A, gaussxK, y, .00005, 100);
+            Vector gaussXn = gauss_seidel.gauss_seidel(A,  y, gaussxK, .00005, 100);
             System.out.println(gaussXn);
             approxG = MatrixCalculator.add(approxG, gaussXn);
             System.out.println("");
@@ -100,10 +84,13 @@ public class jacobi_gauss_graph {
         MatrixCalculator.divide(approxJ, 100.0);
         System.out.print("Approximate Solution using Jacobi: ");
         System.out.println(approxJ);
+        System.out.println("error: " + Vector.computeError(approxJ, exact));
         System.out.println("");
+
         System.out.print("Approximate Solution using Gauss: ");
         MatrixCalculator.divide(approxG, 100.0);
         System.out.println(approxG);
+        System.out.println("error: " + Vector.computeError(approxG, exact));
 
     }
 
