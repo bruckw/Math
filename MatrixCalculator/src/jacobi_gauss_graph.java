@@ -32,8 +32,6 @@ public class jacobi_gauss_graph {
         Matrix A = new Matrix(matrix);
 
         // the b vector
-        double[] vecb = {0.1,0.1,0.1};
-        Vector b = new Vector(vecb);
 
         // the exact solution
         double[] vecE = {(double)9/190, (double)28/475, (double) 33/475};
@@ -44,17 +42,42 @@ public class jacobi_gauss_graph {
         //approximation fo gauss
         Vector approxG = new Vector(3);
         while (count < iterations) {
+            final double[] vecb = {0.1,0.1,0.1};
+            final Vector b = new Vector(vecb);
             Vector xk = generateXk();
+            Vector jacobixK = xk;
+            Vector gaussxK = xk;
             System.out.print("Xk: ");
             System.out.println(xk);
             //solution using Jacobi
+            System.out.print("Matrix A: ");
+            System.out.println(A);
+            System.out.print("vECTOR B: ");
+            System.out.println(b);
+            System.out.println("Tol: " + tol);
             System.out.println("Jacobi Solution: ");
-            Vector JacobiXn = Jacobi.jacobi_iter(A, xk, b, .00005, 100);
+            Vector JacobiXn = Jacobi.jacobi_iter(A, jacobixK, b, .00005, 100);
             approxJ = MatrixCalculator.add(approxJ, JacobiXn);
+
+
+            //gauss stuff
+
+            final double[] vecy = {0.1,0.1,0.1};
+            final Vector y = new Vector(vecb);
+
             System.out.println(JacobiXn);
             System.out.println("");
+
+            System.out.print("Matrix A: ");
+            System.out.println(A);
+            System.out.print("gaussXk: ");
+            System.out.println(gaussxK);
+            System.out.print("vECTOR Y: ");
+            System.out.println(y);
+            System.out.println("Tol: " + tol);
             System.out.println("gauss_seidel Solution: ");
-            Vector gaussXn = gauss_seidel.gauss_seidel(A, xk, b, .00005, 100);
+
+            Vector gaussXn = gauss_seidel.gauss_seidel(A, gaussxK, y, .00005, 100);
             System.out.println(gaussXn);
             approxG = MatrixCalculator.add(approxG, gaussXn);
             System.out.println("");

@@ -95,7 +95,7 @@ public class gauss_seidel {
 
         double[] vecb = {0.1,0.1,0.1};
         Vector b = new Vector(vecb);
-        double[] vecx = {2, 2, 2};
+        double[] vecx = {0.386103259640306, 0.12546455399768308, -0.9462979707489672};
         Vector x = new Vector(vecx);
         Vector toReturn = gauss_seidel(a, b, x, .00001, 100);
 
