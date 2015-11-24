@@ -178,4 +178,32 @@ public class MatrixCalculator {
         }
         return product;
     }
+
+    /**
+     * Subtracts two vectors
+     * @param a The first vector
+     * @param b The second vector
+     * @return The difference vector
+     * @throws IllegalArgumentException Vectors' lengths do not match
+     */
+    public static Vector subtract(Vector a, Vector b) {
+        if (a.numberOfElements() != b.numberOfElements()) {
+            throw new IllegalArgumentException("Vectors' number of elements are not equal");
+        }
+
+        Vector x = new Vector(a.numberOfElements());
+        for (int i = 0; i < a.numberOfElements(); i++) {
+            x.setVectorEntry(i, a.getVectorEntry(i) - b.getVectorEntry(i));
+        }
+        return x;
+    }
+
+    public static void divide(Vector a, Double b) {
+        for(int i = 0; i<a.getVectorRows(); i++) {
+            a.setVectorEntry(i,(double)a.getVectorEntry(i)/b);
+        }
+
+    }
+
+
 }
