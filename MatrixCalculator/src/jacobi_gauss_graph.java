@@ -87,7 +87,7 @@ public class jacobi_gauss_graph {
         System.out.println(approxG);
         System.out.println("error: " + Vector.computeError(approxG, exact));
         System.out.print("");
-        System.out.println("jacobi iterations/ gauss iterations: " + (double) ((double) numJIterations/numJIterations));
+        System.out.println("Iteration ratio: " + (double)numJIterations/numGIterations);
 
 
     }
