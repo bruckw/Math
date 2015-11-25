@@ -27,7 +27,7 @@ public class gauss_seidel {
         a.setMatrixEntry(2,2,1);
 
         double[] vecb = {0.1,0.1,0.1};
-        Vector y = new Vector(vecb);
+        Vector b = new Vector(vecb);
 
         final int MAX_ITER = max;
         iterations = 0;
@@ -53,7 +53,7 @@ public class gauss_seidel {
             }
 
             for (int i = 0; i < a.getMatrixRows(); i++) {
-                sum = y.getVectorEntry(i);
+                sum = b.getVectorEntry(i);
                 for (int j = 0; j < a.getMatrixColumns(); j++) {
                     if (i != j) {
                         sum -= a.getMatrixEntry(i, j) * x.getVectorEntry(j);
@@ -94,7 +94,7 @@ public class gauss_seidel {
                 {1/3, 1/4, 1}
         };
 
-        double[] vecx = {.00000063,-.00400405052,.599699601};
+        double[] vecx = {0,0,0};
         Vector x = new Vector(vecx);
         Vector toReturn = gs_iter(x, .00001, 100);
 
