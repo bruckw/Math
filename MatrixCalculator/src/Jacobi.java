@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -11,7 +12,21 @@ public class Jacobi {
 
     private static int iterations;
 
-    public static Vector jacobi_iter(Matrix a, Vector x, Vector b, double tolerance, int max) {
+    public static Vector jacobi_iter(Vector x, double tolerance, int max) {
+        Matrix a = new Matrix(3,3);
+        a.setMatrixEntry(0,0,1);
+        a.setMatrixEntry(0,1,.5);
+        a.setMatrixEntry(0,2,(double)1/3);
+        a.setMatrixEntry(1,0,.5);
+        a.setMatrixEntry(1,1,1);
+        a.setMatrixEntry(1,2,.25);
+        a.setMatrixEntry(2,0,(double)1/3);
+        a.setMatrixEntry(2,1,.25);
+        a.setMatrixEntry(2,2,1);
+
+        double[] vecb = {0.1,0.1,0.1};
+        Vector b = new Vector(vecb);
+
         final int MAX_ITER = max;
         iterations = 0;
         double diff = tolerance + 1;
@@ -73,38 +88,13 @@ public class Jacobi {
                 {.33, .25, 1}
         };
 
-
-        Matrix a = new Matrix(matrix);
-        System.out.println("Matrix A: ");
-        System.out.println(a);
-
-
-        a.setMatrixEntry(0,0,1);
-        a.setMatrixEntry(0,1,.5);
-        a.setMatrixEntry(0,2,(double)1/3);
-        a.setMatrixEntry(1,0,.5);
-        a.setMatrixEntry(1,1,1);
-        a.setMatrixEntry(1,2,.25);
-        a.setMatrixEntry(2,0,(double)1/3);
-        a.setMatrixEntry(2,1,.25);
-        a.setMatrixEntry(2,2,1);
-
-
-        double[] vecb = {0.1,0.1,0.1};
-        Vector b = new Vector(vecb);
-        double[] vecx = {-0.05328960607790245, 0.0022316659776855374, 0.9639285209520501};
+        double[] vecx = {15,6,9};
         Vector x = new Vector(vecx);
-        Vector toReturn = jacobi_iter(a, x, b, .00005, 100);
+        Vector toReturn = jacobi_iter(x, .00005, 100);
         System.out.println(toReturn.toString());
 
 
-        double[] vecc = {5,4,3};
-        Vector c = new Vector(vecc);
-        System.out.println(c);
-        MatrixCalculator.divide(c, 100.0);
-        System.out.println(c);
-        double[] vecd = {2, 3, 4};
-        Vector d = new Vector(vecd);
+
     }
 
 }
