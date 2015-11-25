@@ -110,10 +110,13 @@ public class Vector {
     }
 
 
+
+
     public static double computeError(Vector a, Vector b) {
         Vector x = MatrixCalculator.subtract(a,b);
         return x.normF();
     }
+
 
 
     @Override
