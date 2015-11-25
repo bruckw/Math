@@ -95,9 +95,9 @@ public class MatrixCalculator {
      */
     public static Matrix add(Matrix a, Matrix b) {
 
-        if (a.getMatrixRows() != b.getMatrixRows() || a.getMatrixColumns() != b.getMatrixRows()) {
-            throw new IllegalArgumentException("Rows and columns are not equal");
-        }
+//        if (a.getMatrixRows() != b.getMatrixRows() || a.getMatrixColumns() != b.getMatrixRows()) {
+//            throw new IllegalArgumentException("Rows and columns are not equal");
+//        }
 
         Matrix sum = new Matrix(a.getMatrixRows(), a.getMatrixColumns());
         double sumValue;

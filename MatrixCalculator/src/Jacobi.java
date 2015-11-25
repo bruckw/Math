@@ -1,8 +1,3 @@
-
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.Random;
-
 /**
  * Created by bruckw on 11/17/15.
  */
@@ -10,7 +5,7 @@ public class Jacobi {
 
 
 
-    private static int iterations;
+    private static int iterations=0;
 
     public static Vector jacobi_iter(Vector x, double tolerance, int max) {
         Matrix a = new Matrix(3,3);
@@ -29,48 +24,48 @@ public class Jacobi {
 
         final int MAX_ITER = max;
         iterations = 0;
-        double diff = tolerance + 1;
-        Vector xVec = new Vector(x.getVectorRows());
-        Vector oldXVec = new Vector(x.getVectorRows());
-        double total;
+        double difference = tolerance + 1;
+        Vector xVector = new Vector(x.getVectorRows());
+        Vector oldXVector = new Vector(x.getVectorRows());
+        double sum;
 
-        for (int i = 0; i < oldXVec.getVectorRows(); i++) {
-            oldXVec.setVectorEntry(i, x.getVectorEntry(i));
+        for (int i = 0; i < oldXVector.getVectorRows(); i++) {
+            oldXVector.setVectorEntry(i, x.getVectorEntry(i));
         }
 
-        while(!(diff < tolerance)) {
+        while(!(difference < tolerance)) {
+
             iterations++;
 
             if (iterations > MAX_ITER) {
-                throw new RuntimeException("The system doesn't converge after " + max + " iterations.");
+                throw new RuntimeException("Doesn't converge after 100 iterations.");
             }
 
-            for (int i = 0; i < oldXVec.getVectorRows(); i++) {
-                oldXVec.setVectorEntry(i, xVec.getVectorEntry(i));
+            for (int i = 0; i < oldXVector.getVectorRows(); i++) {
+                oldXVector.setVectorEntry(i, xVector.getVectorEntry(i));
             }
 
             for (int i = 0; i < a.getMatrixRows(); i++) {
-                total = b.getVectorEntry(i);
+                sum = b.getVectorEntry(i);
                 for (int j = 0; j < a.getMatrixColumns(); j++) {
                     if (i != j) {
-
-                        total -= a.getMatrixEntry(i, j) * oldXVec.getVectorEntry(j);
+                        sum -= a.getMatrixEntry(i, j) * oldXVector.getVectorEntry(j);
                     }
                 }
-                total = total / a.getMatrixEntry(i, i);
+                sum = sum / a.getMatrixEntry(i, i);
 
-                xVec.setVectorEntry(i, total);
+                xVector.setVectorEntry(i, sum);
             }
 
             if (iterations > 1) {
-                diff = xVec.getVectorEntry(0) - oldXVec.getVectorEntry(0);
-                diff = Math.abs(diff);
+                difference = xVector.getVectorEntry(0) - oldXVector.getVectorEntry(0);
+                difference = Math.abs(difference);
             }
 
         }
 
         System.out.println(iterations + " iterations made.");
-        return xVec;
+        return xVector;
     }
 
 
@@ -82,19 +77,16 @@ public class Jacobi {
 
 
     public static void main(String[] args) {
-        double [][] matrix = new double[][]{
-                {1, .5, .33},
-                {.5, 1, .5},
-                {.33, .25, 1}
-        };
-
-        double[] vecx = {15,6,9};
+        double[] vecx = {0,0,0};
         Vector x = new Vector(vecx);
+
+
         Vector toReturn = jacobi_iter(x, .00005, 100);
         System.out.println(toReturn.toString());
-
-
-
     }
-
 }
+
+
+
+
+
